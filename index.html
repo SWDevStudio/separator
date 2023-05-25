@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    const TSPlus = 'https://forms.gle/A79279DcoQd5beNs9'
+    const TSCord = 'https://forms.gle/k4Dq4Va21nmkZLKXA'
+    const formSaver = 'form-saver'
+    if (!window.localStorage.getItem(formSaver)) {
+        window.localStorage.setItem(formSaver, Math.random() < 0.5 ? TSPlus : TSCord)
+    }
+    window.location.replace(window.localStorage.getItem(formSaver) || Math.random() < 0.5 ? TSPlus : TSCord)
+</script>
+</body>
+</html>
