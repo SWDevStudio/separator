@@ -12,7 +12,7 @@
     if (!window.localStorage.getItem(formSaver)) {
         window.localStorage.setItem(formSaver, Math.random() < 0.5 ? TSPlus : TSCord)
     }
-    window.location.replace(window.localStorage.getItem(formSaver) || Math.random() < 0.5 ? TSPlus : TSCord)
+    window.location.replace(window.localStorage.getItem(formSaver))
 </script>
 </body>
 </html>
