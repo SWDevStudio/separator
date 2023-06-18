@@ -1,18 +1,72 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
+          integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz"
+          crossorigin="anonymous"></script>
 </head>
 <body>
+
+<!-- Modal -->
+<div class="modal fade " id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Выберите вариант</h1>
+      </div>
+      <div class="modal-body">
+        <div class="form-check">
+          <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2"
+                 value="TSPlus">
+          <label class="form-check-label" for="flexRadioDefault2">
+            Я использую только TeamSpeak 3
+          </label>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1" value="TSCord">
+          Я использую и TeamSpeak 3 и Discord
+          <label class="form-check-label" for="flexRadioDefault1">
+          </label>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" id="buttonConfirm">Принять</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
 <script>
-    const TSPlus = 'https://forms.gle/A79279DcoQd5beNs9'
-    const TSCord = 'https://forms.gle/k4Dq4Va21nmkZLKXA'
+
+    const forms = {
+        TSPlus: 'https://forms.gle/A79279DcoQd5beNs9',
+        TSCord: 'https://forms.gle/k4Dq4Va21nmkZLKXA'
+    }
     const formSaver = 'form-saver'
     if (!window.localStorage.getItem(formSaver)) {
-        window.localStorage.setItem(formSaver, Math.random() < 0.5 ? TSPlus : TSCord)
+        new bootstrap.Modal('#exampleModal', {}).show()
+        document.querySelector('#buttonConfirm').addEventListener('click', () => {
+            const checkedInput = Array.from(document.querySelectorAll('input[name="flexRadioDefault"]')).filter(i => i.checked)[0]
+            if (checkedInput) {
+                window.localStorage.setItem(formSaver, forms[checkedInput.value])
+
+                redirectOnTest()
+            }
+
+        })
+    } else {
+        redirectOnTest()
     }
-    window.location.replace(window.localStorage.getItem(formSaver))
+
+    function redirectOnTest() {
+        window.location.replace(window.localStorage.getItem(formSaver))
+    }
+
 </script>
 </body>
 </html>
